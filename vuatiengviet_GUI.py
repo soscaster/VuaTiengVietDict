@@ -24,6 +24,13 @@
 #        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 import tkinter as tk
+import os
+import sys
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 class Word:
     def __init__(self, word, definition):
@@ -37,7 +44,7 @@ class DictionaryGUI:
 
     def load_dictionary(self):
         dictionary = {}
-        with open('vv30K.txt', 'r', encoding='utf-8') as file:
+        with open('data/vv30K.txt', 'r', encoding='utf-8') as file:
             for line in file:
                 if line.startswith('@'):
                     word = line.strip()[1:]
